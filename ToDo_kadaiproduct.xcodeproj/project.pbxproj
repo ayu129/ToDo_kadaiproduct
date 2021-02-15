@@ -15,6 +15,7 @@
 		FB43162425DA4CE2003F682A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FB43162225DA4CE2003F682A /* LaunchScreen.storyboard */; };
 		FB43162F25DA4CE2003F682A /* ToDo_kadaiproductTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB43162E25DA4CE2003F682A /* ToDo_kadaiproductTests.swift */; };
 		FB43163A25DA4CE2003F682A /* ToDo_kadaiproductUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB43163925DA4CE2003F682A /* ToDo_kadaiproductUITests.swift */; };
+		FB43164B25DA526F003F682A /* AddTodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB43164A25DA526F003F682A /* AddTodoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		FB43163525DA4CE2003F682A /* ToDo_kadaiproductUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ToDo_kadaiproductUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FB43163925DA4CE2003F682A /* ToDo_kadaiproductUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDo_kadaiproductUITests.swift; sourceTree = "<group>"; };
 		FB43163B25DA4CE2003F682A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FB43164A25DA526F003F682A /* AddTodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTodoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				FB43162025DA4CE2003F682A /* Assets.xcassets */,
 				FB43162225DA4CE2003F682A /* LaunchScreen.storyboard */,
 				FB43162525DA4CE2003F682A /* Info.plist */,
+				FB43164A25DA526F003F682A /* AddTodoViewController.swift */,
 			);
 			path = ToDo_kadaiproduct;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FB43164B25DA526F003F682A /* AddTodoViewController.swift in Sources */,
 				FB43161C25DA4CE0003F682A /* ViewController.swift in Sources */,
 				FB43161825DA4CE0003F682A /* AppDelegate.swift in Sources */,
 				FB43161A25DA4CE0003F682A /* SceneDelegate.swift in Sources */,
