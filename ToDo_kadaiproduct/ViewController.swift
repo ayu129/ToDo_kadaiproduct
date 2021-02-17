@@ -38,7 +38,21 @@ class ViewController: UIViewController,UITableViewDataSource {
         todoList_Date = saveData.array(forKey: "todo_Date") as? [String] ?? []
         todoList_Content = saveData.array(forKey: "todo_Content") as? [String] ?? []
         
-        
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
+        {
+            return true
+        }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath){
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            todoList_Date.remove(at: indexPath.row)
+            todoList_Content.remove(at: indexPath.row)
+            table.deleteRows(at: [indexPath as IndexPath], with: UITableView.RowAnimation.automatic)
+            saveData.set(todoList_Date, forKey: "todo_Date")
+            saveData.set(todoList_Content, forKey: "todo_Content")
+        }
     }
     
     @IBAction func myUnwindAction(for unwindSegue: UIStoryboardSegue, towardsViewController subsequentVC: UIViewController) {
