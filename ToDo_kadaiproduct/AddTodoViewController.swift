@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddTodoViewController: UIViewController {
+class AddTodoViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var datePicker: UIDatePicker!
     @IBOutlet var todoTextField: UITextField!
@@ -24,7 +24,8 @@ class AddTodoViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(edit)
+        todoTextField.delegate = self
+        todoTextField.placeholder = "Title"
         if edit == true{
             update = true
             todoTextField.text = contentString
@@ -60,6 +61,11 @@ class AddTodoViewController: UIViewController {
 //        todoList_content.append(todoTextField.text ?? "")
 //        saveData.set(todoList_content, forKey: "todo_Content")
 //    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "backToFirst" {
