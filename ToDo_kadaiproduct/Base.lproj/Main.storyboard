@@ -57,6 +57,9 @@
                                                 </label>
                                             </subviews>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="p9e-F1-qFs" kind="show" identifier="edit" id="b4D-8i-IBk"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -116,6 +119,7 @@
                             <constraint firstItem="WQ6-Ju-jej" firstAttribute="centerY" secondItem="qFf-Nd-vmz" secondAttribute="centerY" id="Sop-Zd-BBX"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="htS-0m-YhG"/>
                     <connections>
                         <outlet property="datePicker" destination="WQ6-Ju-jej" id="MZB-Na-8Hc"/>
                         <outlet property="todoTextField" destination="Kue-zM-N87" id="itF-Jv-GG2"/>
@@ -127,6 +131,9 @@
             <point key="canvasLocation" x="721.73913043478262" y="79.6875"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="b4D-8i-IBk"/>
+    </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

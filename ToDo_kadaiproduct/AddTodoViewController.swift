@@ -16,14 +16,23 @@ class AddTodoViewController: UIViewController {
     
     var formatter = DateFormatter()
     var dateString: String!
+    var date: Date!
+    var contentString: String!
+    var edit: Bool = false
+    var update: Bool = false
+    var index: Int!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-        
-        
-        
+        print(edit)
+        if edit == true{
+            update = true
+            todoTextField.text = contentString
+            formatter.dateFormat = "yyyy/MM/dd"
+            formatter.locale = Locale(identifier: "ja_JP")
+            date = formatter.date(from: dateString)
+            datePicker.date = date
+        }
     }
     
 
@@ -50,7 +59,6 @@ class AddTodoViewController: UIViewController {
 //        saveData.set(todoList_date, forKey: "todo_Date")
 //        todoList_content.append(todoTextField.text ?? "")
 //        saveData.set(todoList_content, forKey: "todo_Content")
-//        print("number3")
 //    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -60,6 +68,10 @@ class AddTodoViewController: UIViewController {
             let firstViewController = segue.destination as! ViewController
             firstViewController.todoDate = self.dateString
             firstViewController.todoContent = self.todoTextField.text
+            firstViewController.update = self.update
+            if update == true{
+                firstViewController.index = self.index
+            }
         }
     }
     
