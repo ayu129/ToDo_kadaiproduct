@@ -22,16 +22,11 @@ class ViewController: UIViewController,UITableViewDataSource, UITableViewDelegat
         return cell!
     }
     
-    //セルが押された時
-    //func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath){
-        
-    //}
-    
     //編集の許可
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool
-        {
-            return true
-        }
+    {
+        return true
+    }
     
     //削除
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath){
@@ -43,6 +38,33 @@ class ViewController: UIViewController,UITableViewDataSource, UITableViewDelegat
             saveData.set(todoList_Content, forKey: "todo_Content")
         }
     }
+    
+    //並び替え
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+            // TODO: 入れ替え時の処理を実装する（データ制御など）
+        let moveDate = todoList_Date[sourceIndexPath.row]
+        todoList_Date.remove(at: sourceIndexPath.row)
+        todoList_Date.insert(moveDate, at:destinationIndexPath.row)
+        let moveContent = todoList_Content[sourceIndexPath.row]
+        todoList_Content.remove(at: sourceIndexPath.row)
+        todoList_Content.insert(moveContent, at:destinationIndexPath.row)
+        saveData.set(todoList_Date, forKey: "todo_Date")
+        saveData.set(todoList_Content, forKey: "todo_Content")
+        
+    }
+    
+    //func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        //return .none
+    //}
+
+    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
+        return false
+    }
+    
     
 
     @IBOutlet var table: UITableView!
@@ -65,6 +87,10 @@ class ViewController: UIViewController,UITableViewDataSource, UITableViewDelegat
         
         todoList_Date = saveData.array(forKey: "todo_Date") as? [String] ?? []
         todoList_Content = saveData.array(forKey: "todo_Content") as? [String] ?? []
+        
+        //並び替え
+        table.isEditing = true
+        table.allowsSelectionDuringEditing = true
         
     }
     
