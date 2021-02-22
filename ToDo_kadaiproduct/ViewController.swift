@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController,UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController,UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -16,6 +16,7 @@ class ViewController: UIViewController,UITableViewDataSource, UITableViewDelegat
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell")
+        print(todoList_Content)
         cell?.detailTextLabel?.text = todoList_Date[indexPath.row]
         cell?.textLabel?.text = todoList_Content[indexPath.row]
         cell?.detailTextLabel?.textColor = UIColor(red: 105/255, green: 105/255, blue: 105/255, alpha: 1)
@@ -78,6 +79,12 @@ class ViewController: UIViewController,UITableViewDataSource, UITableViewDelegat
     var update: Bool = false
     var index: Int!
     
+    @IBOutlet var searchBar: UISearchBar!
+    var dummyDate = [String]()
+    var dummyContent = [String]()
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -85,12 +92,19 @@ class ViewController: UIViewController,UITableViewDataSource, UITableViewDelegat
         
         table.delegate = self
         
+        searchBar.delegate = self
+        
         todoList_Date = saveData.array(forKey: "todo_Date") as? [String] ?? []
         todoList_Content = saveData.array(forKey: "todo_Content") as? [String] ?? []
+        
         
         //並び替え
         table.isEditing = true
         table.allowsSelectionDuringEditing = true
+        
+        //searchBar
+        //何も入力されていなくてもReturnキーを押せるようにする
+        searchBar.enablesReturnKeyAutomatically = false
         
     }
     
@@ -125,6 +139,50 @@ class ViewController: UIViewController,UITableViewDataSource, UITableViewDelegat
             }
         }
     }
+    
+    
+    //検索ボタン押下時の呼び出しメソッド
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+            searchBar.endEditing(true)
+        
+        
+        dummyDate = saveData.array(forKey: "todo_Date") as? [String] ?? []
+        dummyContent = saveData.array(forKey: "todo_Content") as? [String] ?? []
+            
+            //検索結果配列を空にする。
+            todoList_Date.removeAll()
+            todoList_Content.removeAll()
+            
+            if(searchBar.text == "") {
+                //検索文字列が空の場合はすべてを表示する。
+                todoList_Date = dummyDate
+                todoList_Date = dummyContent
+            } else {
+                
+                todoList_Content = dummyContent.filter{ content in
+                    return content.contains(searchBar.text ?? "")
+                }
+                for content in todoList_Content{
+                    if let dateData = dummyContent.firstIndex(of: content){
+                        todoList_Date.append(dummyDate[dateData])
+                    }
+                }
+            }
+            print(todoList_Content)
+            //テーブルを再読み込みする。
+            table.reloadData()
+        todoList_Date = saveData.array(forKey: "todo_Date") as? [String] ?? []
+        todoList_Content = saveData.array(forKey: "todo_Content") as? [String] ?? []
+        }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+            searchBar.resignFirstResponder()
+            searchBar.setShowsCancelButton(false, animated: true)
+            searchBar.text = ""
+        todoList_Date = saveData.array(forKey: "todo_Date") as? [String] ?? []
+        todoList_Content = saveData.array(forKey: "todo_Content") as? [String] ?? []
+            table.reloadData()
+        }
 
 
 
